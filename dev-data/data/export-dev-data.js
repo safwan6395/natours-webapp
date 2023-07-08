@@ -19,7 +19,7 @@ mongoose
   .then(() => console.log('DB connected successfully'));
 
 // Read tours-simple.json file
-const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours-simple.json`));
+const tours = JSON.parse(fs.readFileSync(`${__dirname}/tours.json`));
 
 // Export the Data to DB
 const exportTours = async () => {
