@@ -48,7 +48,6 @@ To run the Natours App, you need to have the following prerequisites installed:
    ```bash
    git clone https://github.com/your-username/natours-app.git
 
-
 2. Navigate to the project directory:
 
     ```bash
@@ -90,15 +89,7 @@ The Natours App is built using the following technologies:
 * Database: MongoDB
 * User Authentication:Passport.js, JWT (JSON Web Tokens)
 * Payment Integration: Stripe API
-* Frontend Framework: React.js
-* State Management: Redux
-* Routing: React Router
-* UI Library: Material-UI
-* Server-side Rendering: Next.js
-* Form Validation: Formik
-* HTTP Requests: Axios
 * Linting: ESLint
-* Testing: Jest, React Testing Library
 
 ## Contributing
 
