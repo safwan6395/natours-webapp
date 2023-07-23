@@ -33,6 +33,8 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
+reviewSchema.index({ user: 1, tour: 1 }, { unique: true });
+
 // aggregate method are created on model thats why caclAvgRatings is created as an static method so the this keyword may point to model itself
 reviewSchema.statics.calcAvgRatings = async function (tourId) {
   const stats = await this.aggregate([
