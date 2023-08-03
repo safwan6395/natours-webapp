@@ -1,31 +1,26 @@
-//- //- buffered code (code that returns something)
-//- h1= tour.toUpperCase()  
-
-//- //- unbuffered code (code that doesnt return anything)
-//- - const x = 2
-
 doctype html
-html(lang='en')
+html
   head
     block head
       meta(charset='UTF-8')
-      meta(name='viewport', content='width=device-width, initial-scale=1.0')
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://127.0.0.1:3000 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;**script-src 'self' http://onlineerp.solution.quebec 'unsafe-inline' 'unsafe-eval';** ">
-      link(href='https://fonts.googleapis.com/css?family=Lato:300,300i,700', rel='stylesheet')
-      link(rel='stylesheet', href='/css/style.css')
-      link(rel='shortcut icon', type='image/png', href='/img/favicon.png')
-      title Natours | #{title || 'All Tours'}
+      meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      link(rel='stylesheet' href='/css/style.css')
+      link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
+      link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
+      title Natours | #{title}
+  
   body
     // HEADER
     include _header
-
-    // MAIN
-    block content 
-
+        
+    // CONTENT
+    block content
+      h1 This is a placeholder heading
+      
     // FOOTER
     include _footer
-
-  //- script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
-  //- script(src="/js/mapBox.js") 
-  //- script(src="/js/login.js") 
-  script(src="/js/bundle.js")
+    
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js')
+    //- script(src='/js/mapbox.js')
+    //- script(src='/js/login.js')
+    script(src='/js/bundle.js')

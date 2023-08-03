@@ -1,8 +1,9 @@
-extends base 
+extends base
 
-block content 
-  main.main 
-    .card-container 
+block content
+  main.main
+    .card-container
+    
       each tour in tours
         .card
           .card__header
@@ -38,8 +39,7 @@ block content
               | 
               span.card__footer-text per person
             p.card__ratings
-              span.card__footer-value= tour.ratingsAverage 
+              span.card__footer-value= tour.ratingsAverage
               | 
-              //- the pipe made the following space after pipe show up between spans 
               span.card__footer-text= `rating (${tour.ratingsQuantity})`
             a.btn.btn--green.btn--small(href=`/tour/${tour.slug}`) Details

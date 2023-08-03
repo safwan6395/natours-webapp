@@ -1,4 +1,4 @@
-class ApiFeatures {
+class APIFeatures {
   constructor(query, queryString) {
     this.query = query;
     this.queryString = queryString;
@@ -7,14 +7,12 @@ class ApiFeatures {
   filter() {
     const queryObj = { ...this.queryString };
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
-    excludedFields.forEach((el) => delete queryObj[el]);
+    excludedFields.forEach(el => delete queryObj[el]);
 
-    //  Advanced Filtering
+    // 1B) Advanced filtering
     let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(
-      /\b(gte|gt|lte|lt)\b/g,
-      (match) => `$${match}`
-    );
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+
     this.query = this.query.find(JSON.parse(queryStr));
 
     return this;
@@ -25,8 +23,9 @@ class ApiFeatures {
       const sortBy = this.queryString.sort.split(',').join(' ');
       this.query = this.query.sort(sortBy);
     } else {
-      this.query = this.query.sort('-ratingsAverage');
+      this.query = this.query.sort('-createdAt');
     }
+
     return this;
   }
 
@@ -37,23 +36,18 @@ class ApiFeatures {
     } else {
       this.query = this.query.select('-__v');
     }
+
     return this;
   }
 
   paginate() {
-    const page = +this.queryString.page || 1;
-    const limit = +this.queryString.limit || 10;
+    const page = this.queryString.page * 1 || 1;
+    const limit = this.queryString.limit * 1 || 100;
     const skip = (page - 1) * limit;
 
     this.query = this.query.skip(skip).limit(limit);
 
-    // if (req.query.page) {
-    //   const numTours = await Tour.countDocuments();
-    //   if (skip >= numTours)
-    //     throw new Error('There is no Content on this page');
-    // }
     return this;
   }
 }
-
-module.exports = ApiFeatures;
+module.exports = APIFeatures;
