@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -15,6 +16,23 @@ const reviewRouter = require('./routes/reviewRoutes');
 const app = express();
 
 // 1. Global Middlewares
+app.use(cors());
+
+// Allow CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+  );
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PATCH, DELETE'
+  );
+
+  next();
+});
+
 // Set security HTTP Headers
 app.use(helmet());
 
@@ -23,7 +41,7 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
 // limit requests from same IP
 const limiter = rateLimit({
-  max: 100,
+  max: 1000,
   windowMs: 60 * 60 * 1000,
   message:
     'too many request from this IP. Please try again in an hour!',
