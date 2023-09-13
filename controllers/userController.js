@@ -62,6 +62,10 @@ exports.createUser = (req, res) => {
   });
 };
 
+exports.setThumbnail = catchAsync((req, res, next) => {
+  res.status(200).json({ message: 'File uploaded successfully' });
+});
+
 exports.getAllUsers = factory.getAll(User);
 exports.getUser = factory.getOne(User);
 

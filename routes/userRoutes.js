@@ -1,10 +1,17 @@
 const express = require('express');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const fileUpload = require('../utils/fileUpload');
 
 const router = express.Router();
 
+router.post(
+  '/setThumbnail',
+  fileUpload.single('file'),
+  userController.setThumbnail
+);
 router.post('/signup', authController.signup);
+
 router.post('/login', authController.login);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);

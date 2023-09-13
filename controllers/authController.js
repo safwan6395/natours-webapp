@@ -43,6 +43,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,
     passwordChangedAt: req.body.passwordChangedAt,
+    photo: 'default.jpg',
   });
 
   createSendToken(newUser, 201, res);
@@ -81,7 +82,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
 
-  if (!token)
+  if (!token || token === 'undefined' || token === 'null')
     return next(
       new AppError("You're not logged in. Please log in first", 401)
     );

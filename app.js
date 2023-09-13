@@ -6,6 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -18,9 +19,15 @@ const app = express();
 // 1. Global Middlewares
 app.use(cors());
 
+// Cookie parser reading the data from the cookie
+app.use(cookieParser());
+
 // Allow CORS
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'http://localhost:5173'
+  );
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
@@ -29,12 +36,17 @@ app.use((req, res, next) => {
     'Access-Control-Allow-Methods',
     'GET, POST, PATCH, DELETE'
   );
+  res.setHeader('Access-Control-Allow-Credentials', true);
 
   next();
 });
 
 // Set security HTTP Headers
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+  })
+);
 
 // Development logging
 if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
