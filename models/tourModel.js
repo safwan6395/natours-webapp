@@ -130,6 +130,10 @@ const tourSchema = new mongoose.Schema(
         ref: 'User',
       },
     ],
+    tourProvider: {
+      type: String,
+      required: [true, 'A tour must have a tour provider'],
+    },
   },
   {
     toJSON: { virtuals: true },
